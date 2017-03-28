@@ -8,6 +8,10 @@
 
 import SpriteKit
 
+public enum NodeAction {
+    case normal, selected, removing, removed
+}
+
 open class Node: SKShapeNode {
     
     lazy var mask: SKCropNode = { [unowned self] in
@@ -55,18 +59,12 @@ open class Node: SKShapeNode {
         set { sprite.color = newValue }
     }
     
-    var texture: SKTexture!
+    private(set) var texture: SKTexture!
     
-    open var selected: Bool = false {
+    public internal(set) var selected: Bool = false {
         didSet {
             guard selected != oldValue else { return }
-            if selected {
-                run(SKAction.scale(to: 4/3, duration: 0.2))
-                sprite.run(SKAction.setTexture(texture))
-            } else {
-                run(SKAction.scale(to: 1, duration: 0.2))
-                sprite.texture = nil
-            }
+            
         }
     }
     
@@ -93,5 +91,28 @@ open class Node: SKShapeNode {
         self.image = image
         self.color = color
     }
+    
+    open override func removeFromParent() {
+//        runAction(forState: .removed)
+        super.removeFromParent()
+    }
+    
+//    open func runAction(forSelection state: NodeState) {
+//        switch state {
+//        case .normal:
+//            run(.scale(to: 1, duration: 0.2))
+//            sprite.texture = nil
+//        case .selected:
+//            run(.scale(to: 4/3, duration: 0.2))
+//            sprite.run(SKAction.setTexture(texture))
+//        case .removing:
+//            let pulseUp = SKAction.scale(to: xScale + 0.13, duration: 0)
+//            let pulseDown = SKAction.scale(to: xScale, duration: 0.3)
+//            let pulse = SKAction.sequence([pulseUp, pulseDown])
+//            run(.repeatForever(pulse))
+//        case .removed:
+//            run(.fadeOut(withDuration: 0.2))
+//        }
+//    }
     
 }

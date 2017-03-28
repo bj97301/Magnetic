@@ -8,6 +8,10 @@
 
 import SpriteKit
 
+public enum MagneticState {
+    case normal, moving, editing
+}
+
 open class Magnetic: SKScene {
     
     public lazy var magneticField: SKFieldNode = { [unowned self] in
@@ -15,12 +19,18 @@ open class Magnetic: SKScene {
         field.region = SKRegion(radius: 2000)
         field.minimumRadius = 2000
         field.strength = 500
-        field.speed = 1
         self.addChild(field)
         return field
     }()
     
-    var moving: Bool = false
+    open var allowsMultipleSelection: Bool = true
+    open var allowsEditing: Bool = false
+    
+    public internal(set) var state: MagneticState = .normal
+    
+    open var selectedChildren: [Node] {
+        return children.flatMap { $0 as? Node }.filter { $0.selected }
+    }
     
     override open func didMove(to view: SKView) {
         super.didMove(to: view)
@@ -47,6 +57,27 @@ open class Magnetic: SKScene {
         super.addChild(node)
     }
     
+//    override open func removeAllChildren() {
+//        let currentPhysicsSpeed = physicsWorld.speed
+//        physicsWorld.speed = 0
+//        let sortedNodes = floatingNodes.sorted { (node: SIFloatingNode, nextNode: SIFloatingNode) -> Bool in
+//            let distance = node.position.distance(from: magneticField.position)
+//            let nextDistance = nextNode.position.distance(from: magneticField.position)
+//            return distance < nextDistance && node.state != .selected
+//        }
+//        var actions: [SKAction] = []
+//        
+//        for node in sortedNodes {
+//            node.physicsBody = nil
+//            let action = actionForFloatingNode(node)
+//            actions.append(action)
+//        }
+//        run(SKAction.sequence(actions)) { [weak self] in
+//            self?.physicsWorld.speed = currentPhysicsSpeed
+//        }
+//        super.removeAllChildren()
+//    }
+    
     override open func atPoint(_ p: CGPoint) -> SKNode {
         var node = super.atPoint(p)
         while true {
@@ -66,13 +97,15 @@ open class Magnetic: SKScene {
 extension Magnetic {
     
     override open func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if state == .editing { return }
+        
         if let touch = touches.first {
             let location = touch.location(in: self)
             let previous = touch.previousLocation(in: self)
             
             if location.length() == 0 { return }
             
-            moving = true
+            state = .moving
             
             let x = location.x - previous.x
             let y = location.y - previous.y
@@ -87,14 +120,21 @@ extension Magnetic {
     }
     
     override open func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if !moving, let point = touches.first?.location(in: self), let node = atPoint(point) as? Node {
-            node.selected = !node.selected
+        if state != .moving, let point = touches.first?.location(in: self), let node = atPoint(point) as? Node {
+            if node.selected {
+                node.selected = false
+            } else {
+                if !allowsMultipleSelection {
+                    selectedChildren.first?.selected = false
+                }
+                node.selected = true
+            }
         }
-        moving = false
+        state = .normal
     }
     
     override open func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        moving = false
+        state = .normal
     }
     
 }

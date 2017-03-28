@@ -11,27 +11,31 @@ import Magnetic
 
 class ViewController: UIViewController {
     
-    var skView: SKView {
-        return view as! SKView
-    }
+    @IBOutlet weak var skView: SKView!
     
-    override func loadView() {
-        super.loadView()
-        
-        self.view = SKView(frame: self.view.bounds)
-    }
+    lazy var scene: Magnetic = { [unowned self] in
+        let scene = Magnetic(size: self.view.bounds.size)
+        self.skView.presentScene(scene)
+        return scene
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let scene = Magnetic(size: self.view.bounds.size)
-        skView.presentScene(scene)
-        
         for _ in 0..<20 {
-            let name = UIImage.all.randomItem()
-            let node = Node(title: name.capitalized, image: UIImage(named: name), color: UIColor.all.randomItem(), radius: 40)
-            scene.addChild(node)
+            add(nil)
         }
+    }
+    
+    @IBAction func add(_ sender: UIControl?) {
+        let name = UIImage.names.randomItem()
+        let color = UIColor.colors.randomItem()
+        let node = Node(title: name.capitalized, image: UIImage(named: name), color: color, radius: 40)
+        scene.addChild(node)
+    }
+    
+    @IBAction func reset(_ sender: UIControl?) {
+        
     }
     
 }
