@@ -21,7 +21,9 @@ $ pod try Magnetic
 
 ## Usage
 
-A `Magnetic` object is an SKScene, present it from an SKView.
+A `Magnetic` object is an [SKScene](https://developer.apple.com/reference/spritekit/skscene).
+
+To display, you present it from an [SKView](https://developer.apple.com/reference/spritekit/skview) object.
 
 ```swift
 import Magnetic
@@ -79,6 +81,12 @@ To install with [Carthage](https://github.com/Carthage/Carthage), simply add thi
 ```ruby
 github "efremidze/Magnetic"
 ```
+
+## Communication
+
+- If you **found a bug**, open an issue.
+- If you **have a feature request**, open an issue.
+- If you **want to contribute**, submit a pull request.
 
 ## Credits
 
