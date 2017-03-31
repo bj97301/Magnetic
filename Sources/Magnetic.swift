@@ -103,7 +103,7 @@ extension Magnetic {
             let location = touch.location(in: self)
             let previous = touch.previousLocation(in: self)
             
-            if location.length() == 0 { return }
+            if location.distance(from: previous) == 0 { return }
             
             state = .moving
             

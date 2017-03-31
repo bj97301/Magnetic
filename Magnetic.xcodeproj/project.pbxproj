@@ -30,6 +30,7 @@
 		8B170D091E8B2858005F45AB /* SFText-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8B170CF41E8B2858005F45AB /* SFText-RegularItalic.otf */; };
 		8B170D0A1E8B2858005F45AB /* SFText-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8B170CF51E8B2858005F45AB /* SFText-Semibold.otf */; };
 		8B170D0B1E8B2858005F45AB /* SFText-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8B170CF61E8B2858005F45AB /* SFText-SemiboldItalic.otf */; };
+		8B170D0E1E8B2FAD005F45AB /* MagneticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B170D0C1E8B2F60005F45AB /* MagneticView.swift */; };
 		8B61070C1E876D13000FF664 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B61070B1E876D13000FF664 /* Node.swift */; };
 		8B6107141E8771A5000FF664 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6107131E8771A5000FF664 /* Extensions.swift */; };
 		8B6914C01E70F6A90007896C /* Magnetic.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B6914BE1E70F6A90007896C /* Magnetic.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -88,6 +89,7 @@
 		8B170CF41E8B2858005F45AB /* SFText-RegularItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFText-RegularItalic.otf"; sourceTree = "<group>"; };
 		8B170CF51E8B2858005F45AB /* SFText-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFText-Semibold.otf"; sourceTree = "<group>"; };
 		8B170CF61E8B2858005F45AB /* SFText-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFText-SemiboldItalic.otf"; sourceTree = "<group>"; };
+		8B170D0C1E8B2F60005F45AB /* MagneticView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagneticView.swift; sourceTree = "<group>"; };
 		8B61070B1E876D13000FF664 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		8B6107131E8771A5000FF664 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8B6914BB1E70F6A90007896C /* Magnetic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Magnetic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,11 +174,12 @@
 		8B6914BD1E70F6A90007896C /* Magnetic */ = {
 			isa = PBXGroup;
 			children = (
-				8B6914BE1E70F6A90007896C /* Magnetic.h */,
-				8B6914DC1E70F6CF0007896C /* Magnetic.swift */,
-				8B61070B1E876D13000FF664 /* Node.swift */,
 				8B6107131E8771A5000FF664 /* Extensions.swift */,
 				8B6914BF1E70F6A90007896C /* Info.plist */,
+				8B6914BE1E70F6A90007896C /* Magnetic.h */,
+				8B6914DC1E70F6CF0007896C /* Magnetic.swift */,
+				8B170D0C1E8B2F60005F45AB /* MagneticView.swift */,
+				8B61070B1E876D13000FF664 /* Node.swift */,
 			);
 			name = Magnetic;
 			path = Sources;
@@ -336,6 +339,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B170D0E1E8B2FAD005F45AB /* MagneticView.swift in Sources */,
 				8B6914DD1E70F6CF0007896C /* Magnetic.swift in Sources */,
 				8B6107141E8771A5000FF664 /* Extensions.swift in Sources */,
 				8B61070C1E876D13000FF664 /* Node.swift in Sources */,

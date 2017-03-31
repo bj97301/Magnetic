@@ -64,7 +64,7 @@ open class Node: SKShapeNode {
     public internal(set) var selected: Bool = false {
         didSet {
             guard selected != oldValue else { return }
-            
+            runAction(forState: selected ? .selected : .normal)
         }
     }
     
@@ -80,7 +80,7 @@ open class Node: SKShapeNode {
             return body
         }()
         self.fillColor = .black
-        self.strokeColor = .clear
+        self.strokeColor = .black
         _ = self.sprite
         _ = self.title
         configure(title: title, image: image, color: color)
@@ -93,26 +93,26 @@ open class Node: SKShapeNode {
     }
     
     open override func removeFromParent() {
-//        runAction(forState: .removed)
+        runAction(forState: .removed)
         super.removeFromParent()
     }
     
-//    open func runAction(forSelection state: NodeState) {
-//        switch state {
-//        case .normal:
-//            run(.scale(to: 1, duration: 0.2))
-//            sprite.texture = nil
-//        case .selected:
-//            run(.scale(to: 4/3, duration: 0.2))
-//            sprite.run(SKAction.setTexture(texture))
-//        case .removing:
-//            let pulseUp = SKAction.scale(to: xScale + 0.13, duration: 0)
-//            let pulseDown = SKAction.scale(to: xScale, duration: 0.3)
-//            let pulse = SKAction.sequence([pulseUp, pulseDown])
-//            run(.repeatForever(pulse))
-//        case .removed:
-//            run(.fadeOut(withDuration: 0.2))
-//        }
-//    }
+    open func runAction(forState state: NodeAction) {
+        switch state {
+        case .normal:
+            run(.scale(to: 1, duration: 0.2))
+            sprite.texture = nil
+        case .selected:
+            run(.scale(to: 4/3, duration: 0.2))
+            sprite.run(SKAction.setTexture(texture))
+        case .removing:
+            let pulseUp = SKAction.scale(to: xScale + 0.13, duration: 0)
+            let pulseDown = SKAction.scale(to: xScale, duration: 0.3)
+            let pulse = SKAction.sequence([pulseUp, pulseDown])
+            run(.repeatForever(pulse))
+        case .removed:
+            run(.fadeOut(withDuration: 0.2))
+        }
+    }
     
 }

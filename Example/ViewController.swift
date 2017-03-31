@@ -11,13 +11,7 @@ import Magnetic
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var skView: SKView!
-    
-    lazy var scene: Magnetic = { [unowned self] in
-        let scene = Magnetic(size: self.view.bounds.size)
-        self.skView.presentScene(scene)
-        return scene
-    }()
+    @IBOutlet weak var magneticView: MagneticView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +25,7 @@ class ViewController: UIViewController {
         let name = UIImage.names.randomItem()
         let color = UIColor.colors.randomItem()
         let node = Node(title: name.capitalized, image: UIImage(named: name), color: color, radius: 40)
-        scene.addChild(node)
+        magneticView.magnetic.addChild(node)
     }
     
     @IBAction func reset(_ sender: UIControl?) {
