@@ -23,13 +23,15 @@ open class Node: SKShapeNode {
             return node
         }()
         self.addChild(node)
-        
-        // Masking creates aliasing. This masks the aliasing.
-        let circle = SKShapeNode(circleOfRadius: self.frame.width / 2)
-        circle.fillColor = .clear
-        circle.strokeColor = .white
-        self.addChild(circle)
-        
+        _ = self.maskOverlay // Masking creates aliasing. This masks the aliasing.
+        return node
+    }()
+    
+    lazy var maskOverlay: SKShapeNode = { [unowned self] in
+        let node = SKShapeNode(circleOfRadius: self.frame.width / 2)
+        node.fillColor = .clear
+        node.strokeColor = self.strokeColor
+        self.addChild(node)
         return node
     }()
     

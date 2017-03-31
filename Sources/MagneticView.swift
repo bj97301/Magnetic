@@ -19,12 +19,16 @@ public class MagneticView: SKView {
     override public init(frame: CGRect) {
         super.init(frame: frame)
         
-        _ = magnetic
+        commonInit()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        commonInit()
+    }
+    
+    func commonInit() {
         _ = magnetic
     }
     
