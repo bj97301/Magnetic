@@ -18,11 +18,18 @@ open class Node: SKShapeNode {
         let node = SKCropNode()
         node.maskNode = {
             let node = SKShapeNode(circleOfRadius: self.frame.width / 2)
-            node.fillColor = .black
+            node.fillColor = .white
             node.strokeColor = .clear
             return node
         }()
         self.addChild(node)
+        
+        // Masking creates aliasing. This masks the aliasing.
+        let circle = SKShapeNode(circleOfRadius: self.frame.width / 2)
+        circle.fillColor = .clear
+        circle.strokeColor = .white
+        self.addChild(circle)
+        
         return node
     }()
     
@@ -79,8 +86,8 @@ open class Node: SKShapeNode {
             body.linearDamping = 2
             return body
         }()
-        self.fillColor = .black
-        self.strokeColor = .black
+        self.fillColor = .white
+        self.strokeColor = .white
         _ = self.sprite
         _ = self.title
         configure(title: title, image: image, color: color)
