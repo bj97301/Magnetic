@@ -35,9 +35,8 @@ open class Node: SKShapeNode {
         return node
     }()
     
-    public lazy var label: SKMultilineLabelNode = { [unowned self] in
-        let label = SKMultilineLabelNode()
-        label.fontName = "Avenir-Black"
+    public lazy var label: SKLabelNode = { [unowned self] in
+        let label = SKLabelNode(fontNamed: "Avenir-Black")
         label.fontSize = 12
         label.verticalAlignmentMode = .center
         self.mask.addChild(label)
