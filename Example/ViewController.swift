@@ -11,7 +11,15 @@ import Magnetic
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var magneticView: MagneticView!
+    @IBOutlet weak var magneticView: MagneticView! {
+        didSet {
+            #if DEBUG
+                magneticView.showsFPS = true
+                magneticView.showsDrawCount = true
+                magneticView.showsQuadCount = true
+            #endif
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

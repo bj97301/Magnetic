@@ -12,6 +12,11 @@ public enum MagneticState {
     case normal, moving, editing
 }
 
+protocol MagneticDelegate {
+    func magnetic(magnetic: Magnetic, didSelectNodeAt index: Int)
+    func magnetic(magnetic: Magnetic, didDeselectNodeAt index: Int)
+}
+
 open class Magnetic: SKScene {
     
     public lazy var magneticField: SKFieldNode = { [unowned self] in
